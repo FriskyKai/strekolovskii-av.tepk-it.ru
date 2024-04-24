@@ -13,12 +13,13 @@ class AuthController extends Controller
 {
     // Регистрация
     public function singIn(RegisterRequest $request) {
-        return response()->json([
-            'success' => true,
-            'code' => 201,
-            'message' => 'Success',
-            'token' => User::create($request->all())->generateToken()
-        ])->setStatusCode(201);
+        if ($request) {
+            throw new ApiException(422, 'Ошибка валидации данных');
+        }
+
+        User::create($request->all());
+
+        return response()->json('Регистрация успешна')->setStatusCode(201);
     }
 
     // Авторизация
@@ -26,13 +27,10 @@ class AuthController extends Controller
         $credentials = request(['email', 'password']);
 
         if (!Auth::attempt($credentials)) {
-            throw new ApiException(401, 'Authorization failed');
+            throw new ApiException(401, 'Unauthorized');
         }
 
         return response()->json([
-            'success' => true,
-            'code' => 200,
-            'message' => 'Success',
             'token' => Auth::user()->generateToken()
         ])->setStatusCode(200);
     }
@@ -40,5 +38,7 @@ class AuthController extends Controller
     // Выход
     public function logout(Request $request) {
         $request->user()->forceFill(['remember_token' => ''])->save();
+
+        return response()->json('Выход из аккаунта')->setStatusCode(200);
     }
 }
