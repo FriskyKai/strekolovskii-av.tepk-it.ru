@@ -38,15 +38,15 @@ Route::middleware('auth:api')->group(function () {
 //    // Удаление роли
 //    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
 //
-//    // ПОЛЬЗОВАТЕЛЬ
-//    // Просмотр всех пользователей
-//    Route::get('/users', [UserController::class, 'index']);
-//    // Просмотр пользователя
-//    Route::get('/users/{id}', [UserController::class, 'show']);
-//    // Редактирование пользователя
-//    Route::patch('/users/{id}', [UserController::class, 'edit']);
-//    // Удаление пользователя
-//    Route::delete('/users/{id}', [UserController::class, 'destroy']);
+    // ПОЛЬЗОВАТЕЛЬ
+    // Просмотр всех пользователей
+    Route::get('/users', [UserController::class, 'index']);
+    // Просмотр пользователя
+    Route::get('/users/{id}', [UserController::class, 'show']);
+    // Редактирование пользователя
+    Route::patch('/users/{id}', [UserController::class, 'update']);
+    // Удаление пользователя
+    Route::delete('/users/{id}', [UserController::class, 'destroy']);
 //
 //    // СМЕНА
 //    // Добавление смены
