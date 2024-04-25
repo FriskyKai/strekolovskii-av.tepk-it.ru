@@ -52,13 +52,13 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductSeeder::class);
 
         // Составы заказов
-        //$this->call(OrderListSeeder::class);
+        $this->call(OrderListSeeder::class);
 
         // Добавки
         $this->call(AdditiveSeeder::class);
 
         // Составы заказов_Добавки
-        //$this->call(OrderListAdditiveSeeder::class);
+        $this->call(OrderListAdditiveSeeder::class);
 
         // Корзины
         //$this->call(CarSeeder::class);
