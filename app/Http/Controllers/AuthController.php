@@ -13,7 +13,7 @@ class AuthController extends Controller
 {
     // Регистрация
     public function singIn(RegisterRequest $request) {
-        if ($request) {
+        if (!$request) {
             throw new ApiException(422, 'Ошибка валидации данных');
         }
 

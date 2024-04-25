@@ -9,31 +9,58 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
+        // Роли
         $this->call(RoleSeeder::class);
-        //$this->call(AddressSeeder::class);
+
+        // Адреса
+        $this->call(AddressSeeder::class);
+
+        // Пользователи
         $this->call(UserSeeder::class);
-        //$this->call(ShiftSeeder::class);
+
+        // Смены сотрудников
+        $this->call(ShiftSeeder::class);
+
+        // Типы оплаты заказа
         $this->call(PaymentTypeSeeder::class);
+
+        // Способы получения заказа
         $this->call(ReceiveMethodSeeder::class);
+
+        // Статусы заказа
         $this->call(StatusSeeder::class);
-        //$this->call(OrderSeeder::class);
-        //$this->call(ArticleSeeder::class);
+
+        // Заказы
+        $this->call(OrderSeeder::class);
+
+        // Новости
+        $this->call(ArticleSeeder::class);
+
+        // Слайдер
         //$this->call(SliderSeeder::class);
-        //$this->call(PhotoSeeder::class);
+
+        // Фотографии
+        $this->call(PhotoSeeder::class);
+
+        // Категории товаров
         $this->call(CategorySeeder::class);
+
+        // Акции
         $this->call(PromotionSeeder::class);
-        //$this->call(ProductSeeder::class);
+
+        // Товары
+        $this->call(ProductSeeder::class);
+
+        // Составы заказов
         //$this->call(OrderListSeeder::class);
+
+        // Добавки
         $this->call(AdditiveSeeder::class);
+
+        // Составы заказов_Добавки
         //$this->call(OrderListAdditiveSeeder::class);
+
+        // Корзины
         //$this->call(CarSeeder::class);
-
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

@@ -17,7 +17,7 @@ class RegisterRequest extends ApiRequest
             'surname' => 'required|string|min:2|max:32',
             'name' => 'required|string|min:2|max:32',
             'email' => 'required|email|min:11|max:32|unique:users',
-            'phone' => 'required|string|regex:/^8-\d{3}-\d{3}-\d{2}-\d{2}$/',
+            'phone' => 'required|string|regex:/^8\d{3}\d{3}\d{2}\d{2}$/',
             'password' => 'required|string|min:6',
         ];
     }
