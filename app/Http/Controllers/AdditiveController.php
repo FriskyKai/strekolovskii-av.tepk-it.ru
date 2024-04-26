@@ -10,20 +10,20 @@ use Illuminate\Http\Request;
 
 class AdditiveController extends Controller
 {
-    // Создание роли
+    // Создание добавки
     public function create(AdditiveCreateRequest $request) {
         $additive = Additive::create($request->all());
 
         return response()->json($additive)->setStatusCode(201);
     }
 
-    // Просмотр всех ролей
+    // Просмотр всех добавок
     public function index() {
         $additives = Additive::all();
         return response()->json($additives)->setStatusCode(200, 'Успешно');
     }
 
-    // Просмотр роли
+    // Просмотр добавки
     public function show($id) {
         $additive = Additive::find($id);
 
@@ -34,7 +34,7 @@ class AdditiveController extends Controller
         return response()->json($additive)->setStatusCode(200, 'Успешно');
     }
 
-    // Редактирование роли
+    // Редактирование добавки
     public function update(AdditiveUpdateRequest $request, $id) {
         $additive = Additive::find($id);
 
@@ -46,7 +46,7 @@ class AdditiveController extends Controller
         return response()->json($additive)->setStatusCode(200, 'Изменено');
     }
 
-    // Удаление роли
+    // Удаление добавки
     public function destroy($id) {
         $additive = Additive::find($id);
 

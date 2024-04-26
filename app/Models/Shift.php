@@ -9,7 +9,7 @@ class Shift extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['start', 'end'];
+    protected $fillable = ['start', 'end', 'user_id'];
 
     protected $hidden = [
         'created_at',

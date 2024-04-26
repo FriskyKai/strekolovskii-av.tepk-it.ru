@@ -61,6 +61,6 @@ class DatabaseSeeder extends Seeder
         $this->call(OrderListAdditiveSeeder::class);
 
         // Корзины
-        //$this->call(CarSeeder::class);
+        //$this->call(CartSeeder::class);
     }
 }

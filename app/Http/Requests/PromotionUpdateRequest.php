@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdditiveUpdateRequest extends ApiRequest
+class PromotionUpdateRequest extends ApiRequest
 {
     public function authorize(): bool
     {
@@ -14,7 +14,7 @@ class AdditiveUpdateRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|min:3|max:64'
+            'percent' => 'integer|min:1|max:100'
         ];
     }
 }
