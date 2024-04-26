@@ -15,6 +15,11 @@ class OrderList extends Model
         'total',
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function orderListAdditives() {
         return $this->hasMany(OrderListAdditive::class);

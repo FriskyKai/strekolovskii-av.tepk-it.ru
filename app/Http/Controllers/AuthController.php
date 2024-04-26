@@ -13,10 +13,6 @@ class AuthController extends Controller
 {
     // Регистрация
     public function singIn(RegisterRequest $request) {
-        if (!$request) {
-            throw new ApiException(422, 'Ошибка валидации данных');
-        }
-
         User::create($request->all());
 
         return response()->json('Регистрация успешна')->setStatusCode(201);

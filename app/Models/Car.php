@@ -11,6 +11,11 @@ class Car extends Model
 
     protected $fillable = ['count'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function user() {
         return $this->belongsTo(User::class);

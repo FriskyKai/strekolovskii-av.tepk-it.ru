@@ -15,6 +15,6 @@ class ApiRequest extends FormRequest
 
     protected function failedAuthorization()
     {
-        throw new ApiException(403, 'Login failed');
+        throw new ApiException(403, 'Forbidden for you');
     }
 }

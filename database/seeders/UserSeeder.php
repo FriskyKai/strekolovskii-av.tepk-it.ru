@@ -44,6 +44,14 @@ class UserSeeder extends Seeder
                 'password' => bcrypt('QWEasd4'),
                 'role_id' => 4
             ],
+            [
+                'surname' => 'Admin',
+                'name' => 'Admin',
+                'email' => 'admin@mail.ru',
+                'phone' => '88005553535',
+                'password' => bcrypt('admin1'),
+                'role_id' => 1
+            ],
         ]);
     }
 }

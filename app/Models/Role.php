@@ -9,7 +9,12 @@ class Role extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['code', 'name'];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
 
     // Связи
     public function users() {

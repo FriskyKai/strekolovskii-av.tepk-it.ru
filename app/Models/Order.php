@@ -11,6 +11,11 @@ class Order extends Model
 
     protected $fillable = ['date'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function orderLists() {
         return $this->hasMany(OrderList::class);

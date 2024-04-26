@@ -11,6 +11,11 @@ class Slider extends Model
 
     protected $fillable = [];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function photos() {
         return $this->hasMany(Photo::class);

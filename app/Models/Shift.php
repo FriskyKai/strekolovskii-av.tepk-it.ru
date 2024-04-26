@@ -11,6 +11,11 @@ class Shift extends Model
 
     protected $fillable = ['start', 'end'];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function user() {
         return $this->belongsTo(User::class);

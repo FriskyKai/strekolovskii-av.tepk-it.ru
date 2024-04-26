@@ -11,6 +11,11 @@ class OrderListAdditive extends Model
 
     protected $fillable = [];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function orderList() {
         return $this->belongsTo(OrderList::class);
