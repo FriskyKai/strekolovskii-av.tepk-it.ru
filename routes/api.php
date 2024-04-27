@@ -129,10 +129,12 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
 //    // СОСТАВ ЗАКАЗА_ДОБАВКА
-//    // Просмотр всех добавок в составе заказа
+//    // Просмотр всех добавок в
 //    Route::get('/orderlistadditives', [OrderListAdditiveController::class, 'index']);
+    //    // Просмотр всех добавок в составе заказа
+//    Route::get('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'index']);
 //    // Добавление добавки в состав заказа
-//    Route::post('/orderlistadditives', [OrderListAdditiveController::class, 'create']);
+//    Route::post('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'create']);
 //    // Удаление добавки из состава заказа
 //    Route::delete('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'destroy']);
 

@@ -19,7 +19,7 @@ class PhotoController extends Controller
 
             foreach ($request->file('photos') as $photo) {
                 // Сохраняем фотографию в хранилище
-                $path = $photo->store('public/photos');
+                $path = $photo->store('photos/');
 
                 // Создаем запись о фотографии в базе данных
                 $uploadedPhoto = new Photo();
@@ -78,10 +78,10 @@ class PhotoController extends Controller
         // Обновляем имя файла в хранилище
         if ($newPath && $newFileName && $currentPath !== $newPath) {
             // Удаляем старый файл из хранилища, только если путь изменился
-            Storage::move($currentPath, 'public/photos/' . $newFileName);
+            Storage::move($currentPath, 'photos/' . $newFileName);
 
             // Обновляем путь к фотографии в базе данных
-            $photo->path = 'public/photos/' . $newFileName;
+            $photo->path = 'photos/' . $newFileName;
             $photo->save();
 
             return response()->json('Путь фотографии успешно изменён')->setStatusCode(200, 'Успешно');

@@ -20,7 +20,7 @@ class ProductCreateRequest extends ApiRequest
             'price' => 'required|integer',
             'description' => 'required|string',
             'photo_id' => 'required|integer|exists:photos,id',
-            'promotion_id' => 'required|integer|exists:promotions,id',
+            'promotion_id' => 'integer|exists:promotions,id',
             'category_id' => 'required|integer|exists:categories,id',
         ];
     }
