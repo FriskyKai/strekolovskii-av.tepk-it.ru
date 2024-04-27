@@ -12,13 +12,13 @@ class PhotoSeeder extends Seeder
     {
         DB::table('photos')->insert([
             [
-                'path' => 'storage\app\public\photos\photo1.jpg',
+                'path' => 'public/photos/photo1.jpg',
             ],
             [
-                'path' => 'storage\app\public\photos\photo2.png',
+                'path' => 'public/photos/photo2.png',
             ],
             [
-                'path' => 'storage\app\public\photos\photo3.jpg',
+                'path' => 'public/photos/photo3.jpg',
             ],
         ]);
     }

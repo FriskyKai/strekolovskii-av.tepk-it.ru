@@ -4,6 +4,8 @@ use App\Http\Controllers\AdditiveController;
 use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\PhotoController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShiftController;
@@ -32,6 +34,11 @@ Route::get('/categories', [CategoryController::class, 'index']);
 // Просмотр категории
 Route::get('/categories/{id}', [CategoryController::class, 'show']);
 
+// Просмотр всех товаров
+Route::get('/products', [ProductController::class, 'index']);
+// Просмотр товара
+Route::get('/products/{id}', [ProductController::class, 'show']);
+
 // Роуты для авторизированных пользователей
 Route::middleware('auth:api')->group(function () {
     // Выход
@@ -45,7 +52,7 @@ Route::middleware('auth:api')->group(function () {
     // Просмотр роли
     Route::get('/roles/{id}', [RoleController::class, 'show']);
     // Редактирование роли
-    Route::patch('/roles/{id}', [RoleController::class, 'update']);
+    Route::post('/roles/{id}', [RoleController::class, 'update']);
     // Удаление роли
     Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
 
@@ -57,7 +64,7 @@ Route::middleware('auth:api')->group(function () {
     // Профиль пользователя (Для пользователя)
     Route::get('/profile', [UserController::class, 'profile']);
     // Редактирование пользователя
-    Route::patch('/users/{id}', [UserController::class, 'update']);
+    Route::post('/users/{id}', [UserController::class, 'update']);
     // Удаление пользователя
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
 
@@ -69,7 +76,7 @@ Route::middleware('auth:api')->group(function () {
     // Просмотр смены
     Route::get('/shifts/{id}', [ShiftController::class, 'show']);
     // Редактирование смены
-    Route::patch('/shifts/{id}', [ShiftController::class, 'update']);
+    Route::post('/shifts/{id}', [ShiftController::class, 'update']);
     // Удаление смены
     Route::delete('/shifts/{id}', [ShiftController::class, 'destroy']);
 
@@ -81,7 +88,7 @@ Route::middleware('auth:api')->group(function () {
     // Просмотр адреса
     Route::get('/addresses/{id}', [AddressController::class, 'show']);
     // Редактирование адреса
-    Route::patch('/addresses/{id}', [AddressController::class, 'update']);
+    Route::post('/addresses/{id}', [AddressController::class, 'update']);
     // Удаление адреса
     Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
 
@@ -117,7 +124,7 @@ Route::middleware('auth:api')->group(function () {
     // Просмотр добавки
     Route::get('/additives/{id}', [AdditiveController::class, 'show']);
     // Редактирование добавки
-    Route::patch('/additives/{id}', [AdditiveController::class, 'update']);
+    Route::post('/additives/{id}', [AdditiveController::class, 'update']);
     // Удаление добавки
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
@@ -129,23 +136,19 @@ Route::middleware('auth:api')->group(function () {
 //    // Удаление добавки из состава заказа
 //    Route::delete('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'destroy']);
 
-//    // ТОВАР
-//    // Добавление товара
-//    Route::post('/products', [ProductController::class, 'create']);
-//    // Просмотр всех товаров
-//    Route::get('/products', [ProductController::class, 'index']);
-//    // Просмотр товара
-//    Route::get('/products/{id}', [ProductController::class, 'show']);
-//    // Редактирование товара
-//    Route::patch('/products/{id}', [ProductController::class, 'update']);
-//    // Удаление товара
-//    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
+    // ТОВАР
+    // Добавление товара
+    Route::post('/products', [ProductController::class, 'create']);
+    // Редактирование товара
+    Route::post('/products/{id}', [ProductController::class, 'update']);
+    // Удаление товара
+    Route::delete('/products/{id}', [ProductController::class, 'destroy']);
 
     // КАТЕГОРИЯ
     // Добавление категории
     Route::post('/categories', [CategoryController::class, 'create']);
     // Редактирование категории
-    Route::patch('/categories/{id}', [CategoryController::class, 'update']);
+    Route::post('/categories/{id}', [CategoryController::class, 'update']);
     // Удаление категории
     Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
 
@@ -157,7 +160,7 @@ Route::middleware('auth:api')->group(function () {
     // Просмотр акции
     Route::get('/promotions/{id}', [PromotionController::class, 'show']);
     // Редактирование акции
-    Route::patch('/promotions/{id}', [PromotionController::class, 'update']);
+    Route::post('/promotions/{id}', [PromotionController::class, 'update']);
     // Удаление акции
     Route::delete('/promotions/{id}', [PromotionController::class, 'destroy']);
 
@@ -172,6 +175,18 @@ Route::middleware('auth:api')->group(function () {
 //    Route::patch('/articles/{id}', [ArticleController::class, 'update']);
 //    // Удаление новости
 //    Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
+
+    // ФОТОГРАФИИ
+    // Добавление фотографии
+    Route::post('/photos', [PhotoController::class, 'store']);
+    // Просмотр всех фотографий
+    Route::get('/photos', [PhotoController::class, 'index']);
+    // Просмотр фотографии
+    Route::get('/photos/{id}', [PhotoController::class, 'show']);
+    // Редактирование фотографии
+    Route::post('/photos/{id}', [PhotoController::class, 'update']);
+    // Удаление фотографии
+    Route::delete('/photos/{id}', [PhotoController::class, 'destroy']);
 
 //    // СЛАЙДЕР
 //    // Добавление фотографии в слайдер
