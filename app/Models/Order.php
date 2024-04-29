@@ -9,7 +9,14 @@ class Order extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['date'];
+    protected $fillable = [
+        'date',
+        'status_id',
+        'receive_method_id',
+        'payment_type_id',
+        'user_id',
+        'address_id'
+    ];
 
     protected $hidden = [
         'created_at',

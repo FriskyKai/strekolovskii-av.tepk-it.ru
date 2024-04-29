@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\AdditiveController;
 use App\Http\Controllers\AddressController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\ArticlePhotoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromotionController;
@@ -38,6 +41,9 @@ Route::get('/categories/{id}', [CategoryController::class, 'show']);
 Route::get('/products', [ProductController::class, 'index']);
 // Просмотр товара
 Route::get('/products/{id}', [ProductController::class, 'show']);
+
+// Просмотр всех фотографий
+Route::get('/photos', [PhotoController::class, 'index']);
 
 // Роуты для авторизированных пользователей
 Route::middleware('auth:api')->group(function () {
@@ -92,29 +98,29 @@ Route::middleware('auth:api')->group(function () {
     // Удаление адреса
     Route::delete('/addresses/{id}', [AddressController::class, 'destroy']);
 
-//    // ЗАКАЗ
-//    // Добавление заказа
-//    Route::post('/orders', [OrderController::class, 'create']);
-//    // Просмотр всех заказов
-//    Route::get('/orders', [OrderController::class, 'index']);
-//    // Просмотр заказа
-//    Route::get('/orders/{id}', [OrderController::class, 'show']);
-//    // Редактирование заказа
-//    Route::patch('/orders/{id}', [OrderController::class, 'update']);
-//    // Удаление заказа
-//    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+    // ЗАКАЗ
+    // Добавление заказа
+    Route::post('/orders', [OrderController::class, 'create']);
+    // Просмотр всех заказов
+    Route::get('/orders', [OrderController::class, 'index']);
+    // Просмотр заказа
+    Route::get('/orders/{id}', [OrderController::class, 'show']);
+    // Редактирование заказа
+    Route::post('/orders/{id}', [OrderController::class, 'update']);
+    // Удаление заказа
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
 //    // СОСТАВ ЗАКАЗА
 //    // Добавление состава заказа
-//    Route::post('/orderlists', [OrderListController::class, 'create']);
+//    Route::post('/order-lists', [OrderListController::class, 'create']);
 //    // Просмотр всех составов заказа
-//    Route::get('/orderlists', [OrderListController::class, 'index']);
+//    Route::get('/order-lists', [OrderListController::class, 'index']);
 //    // Просмотр состава заказа
-//    Route::get('/orderlists/{id}', [OrderListController::class, 'show']);
+//    Route::get('/order-lists/{id}', [OrderListController::class, 'show']);
 //    // Редактирование состава заказа
-//    Route::patch('/orderlists/{id}', [OrderListController::class, 'update']);
+//    Route::post('/order-lists/{id}', [OrderListController::class, 'update']);
 //    // Удаление состава заказа
-//    Route::delete('/orderlists/{id}', [OrderListController::class, 'destroy']);
+//    Route::delete('/order-lists/{id}', [OrderListController::class, 'destroy']);
 
     // ДОБАВКА
     // Добавление добавки
@@ -130,13 +136,13 @@ Route::middleware('auth:api')->group(function () {
 
 //    // СОСТАВ ЗАКАЗА_ДОБАВКА
 //    // Просмотр всех добавок в
-//    Route::get('/orderlistadditives', [OrderListAdditiveController::class, 'index']);
+//    Route::get('/order-list-additives', [OrderListAdditiveController::class, 'index']);
     //    // Просмотр всех добавок в составе заказа
-//    Route::get('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'index']);
+//    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
 //    // Добавление добавки в состав заказа
-//    Route::post('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'create']);
+//    Route::post('/order-list-additives/{id}', [OrderListAdditiveController::class, 'create']);
 //    // Удаление добавки из состава заказа
-//    Route::delete('/orderlistadditives/{id}', [OrderListAdditiveController::class, 'destroy']);
+//    Route::delete('/order-list-additives/{id}', [OrderListAdditiveController::class, 'destroy']);
 
     // ТОВАР
     // Добавление товара
@@ -166,23 +172,21 @@ Route::middleware('auth:api')->group(function () {
     // Удаление акции
     Route::delete('/promotions/{id}', [PromotionController::class, 'destroy']);
 
-//    // НОВОСТИ
-//    // Добавление новости
-//    Route::post('/articles', [ArticleController::class, 'create']);
-//    // Просмотр всех новостей
-//    Route::get('/articles', [ArticleController::class, 'index']);
-//    // Просмотр новости
-//    Route::get('/articles/{id}', [ArticleController::class, 'show']);
-//    // Редактирование новости
-//    Route::patch('/articles/{id}', [ArticleController::class, 'update']);
-//    // Удаление новости
-//    Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
+    // НОВОСТИ
+    // Добавление новости
+    Route::post('/articles', [ArticleController::class, 'create']);
+    // Просмотр всех новостей
+    Route::get('/articles', [ArticleController::class, 'index']);
+    // Просмотр новости
+    Route::get('/articles/{id}', [ArticleController::class, 'show']);
+    // Редактирование новости
+    Route::post('/articles/{id}', [ArticleController::class, 'update']);
+    // Удаление новости
+    Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
 
     // ФОТОГРАФИИ
     // Добавление фотографии
     Route::post('/photos', [PhotoController::class, 'store']);
-    // Просмотр всех фотографий
-    Route::get('/photos', [PhotoController::class, 'index']);
     // Просмотр фотографии
     Route::get('/photos/{id}', [PhotoController::class, 'show']);
     // Редактирование фотографии
@@ -190,13 +194,25 @@ Route::middleware('auth:api')->group(function () {
     // Удаление фотографии
     Route::delete('/photos/{id}', [PhotoController::class, 'destroy']);
 
+    // НОВОСТЬ_ФОТОГРАФИЯ
+    // Добавление новостной фотографии
+    Route::post('/article-photos', [ArticlePhotoController::class, 'create']);
+    // Просмотр всех новостных фотографий
+    Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
+    // Просмотр новостной фотографии
+    Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
+    // Редактирование новостной фотографии
+    Route::post('/article-photos/{id}', [ArticlePhotoController::class, 'update']);
+    // Удаление новостной фотографии
+    Route::delete('/article-photos/{id}', [ArticlePhotoController::class, 'destroy']);
+
 //    // СЛАЙДЕР
 //    // Добавление фотографии в слайдер
 //    Route::post('/slider', [SliderController::class, 'add']);
 //    // Просмотр всех фотографий в слайдере
 //    Route::get('/articles', [SliderController::class, 'index']);
 //    // Редактирование фотографий в слайдере
-//    Route::patch('/articles/{id}', [SliderController::class, 'update']);
+//    Route::post('/articles/{id}', [SliderController::class, 'update']);
 //    // Удаление фотографий в слайдере
 //    Route::delete('/articles/{id}', [SliderController::class, 'destroy']);
 
@@ -208,7 +224,7 @@ Route::middleware('auth:api')->group(function () {
 //    // Просмотр корзины
 //    Route::get('/carts/{id}', [CartController::class, 'show']);
 //    // Редактирование корзины
-//    Route::patch('/carts/{id}', [CartController::class, 'update']);
+//    Route::post('/carts/{id}', [CartController::class, 'update']);
 //    // Удаление корзины
 //    Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 });

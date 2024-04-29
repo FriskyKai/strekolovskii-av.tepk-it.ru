@@ -9,20 +9,20 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    // Создание роли
+    // Создание товара
     public function create(ProductCreateRequest $request) {
         $product = Product::create($request->all());
 
         return response()->json($product)->setStatusCode(201);
     }
 
-    // Просмотр всех ролей
+    // Просмотр всех товаров
     public function index() {
         $products = Product::all();
         return response()->json($products)->setStatusCode(200, 'Успешно');
     }
 
-    // Просмотр роли
+    // Просмотр товаров
     public function show($id) {
         $product = Product::find($id);
 
@@ -33,7 +33,7 @@ class ProductController extends Controller
         return response()->json($product)->setStatusCode(200, 'Успешно');
     }
 
-    // Редактирование роли
+    // Редактирование товара
     public function update(ProductUpdateRequest $request, $id) {
         $product = Product::find($id);
 
@@ -45,7 +45,7 @@ class ProductController extends Controller
         return response()->json($product)->setStatusCode(200, 'Изменено');
     }
 
-    // Удаление роли
+    // Удаление товара
     public function destroy($id) {
         $product = Product::find($id);
 

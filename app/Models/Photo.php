@@ -25,7 +25,7 @@ class Photo extends Model
         return $this->belongsTo(Slider::class);
     }
 
-    public function article() {
-        return $this->belongsTo(Article::class);
+    public function articlePhotos() {
+        return $this->hasMany(ArticlePhoto::class);
     }
 }

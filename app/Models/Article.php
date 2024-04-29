@@ -21,7 +21,7 @@ class Article extends Model
     ];
 
     // Связи
-    public function photos() {
-        return $this->hasMany(Photo::class);
+    public function articlePhotos() {
+        return $this->hasMany(ArticlePhoto::class);
     }
 }
