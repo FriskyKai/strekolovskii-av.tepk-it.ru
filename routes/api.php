@@ -5,8 +5,10 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\ArticlePhotoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderListController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromotionController;
@@ -110,17 +112,17 @@ Route::middleware('auth:api')->group(function () {
     // Удаление заказа
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
-//    // СОСТАВ ЗАКАЗА
-//    // Добавление состава заказа
-//    Route::post('/order-lists', [OrderListController::class, 'create']);
-//    // Просмотр всех составов заказа
-//    Route::get('/order-lists', [OrderListController::class, 'index']);
-//    // Просмотр состава заказа
-//    Route::get('/order-lists/{id}', [OrderListController::class, 'show']);
-//    // Редактирование состава заказа
-//    Route::post('/order-lists/{id}', [OrderListController::class, 'update']);
-//    // Удаление состава заказа
-//    Route::delete('/order-lists/{id}', [OrderListController::class, 'destroy']);
+    // СОСТАВ ЗАКАЗА
+    // Добавление состава заказа
+    Route::post('/order-lists', [OrderListController::class, 'create']);
+    // Просмотр всех составов заказов
+    Route::get('/order-lists', [OrderListController::class, 'index']);
+    // Просмотр состава заказа
+    Route::get('/order-lists/{id}', [OrderListController::class, 'show']);
+    // Редактирование состава заказа
+    Route::post('/order-lists/{id}', [OrderListController::class, 'update']);
+    // Удаление состава заказа
+    Route::delete('/order-lists/{id}', [OrderListController::class, 'destroy']);
 
     // ДОБАВКА
     // Добавление добавки
@@ -135,9 +137,9 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
 //    // СОСТАВ ЗАКАЗА_ДОБАВКА
-//    // Просмотр всех добавок в
+//    // Просмотр всех добавок в составах заказов
 //    Route::get('/order-list-additives', [OrderListAdditiveController::class, 'index']);
-    //    // Просмотр всех добавок в составе заказа
+//    // Просмотр всех добавок в составе заказа
 //    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
 //    // Добавление добавки в состав заказа
 //    Route::post('/order-list-additives/{id}', [OrderListAdditiveController::class, 'create']);
@@ -216,15 +218,15 @@ Route::middleware('auth:api')->group(function () {
 //    // Удаление фотографий в слайдере
 //    Route::delete('/articles/{id}', [SliderController::class, 'destroy']);
 
-//    // КОРЗИНА
-//    // Добавление корзины
-//    Route::post('/carts', [CartController::class, 'create']);
-//    // Просмотр всех корзин
-//    Route::get('/carts', [CartController::class, 'index']);
-//    // Просмотр корзины
-//    Route::get('/carts/{id}', [CartController::class, 'show']);
-//    // Редактирование корзины
-//    Route::post('/carts/{id}', [CartController::class, 'update']);
-//    // Удаление корзины
-//    Route::delete('/carts/{id}', [CartController::class, 'destroy']);
+    // КОРЗИНА
+    // Добавление корзины
+    Route::post('/carts', [CartController::class, 'create']);
+    // Просмотр всех корзин
+    Route::get('/carts', [CartController::class, 'index']);
+    // Просмотр корзины
+    Route::get('/carts/{id}', [CartController::class, 'show']);
+    // Редактирование корзины
+    Route::post('/carts/{id}', [CartController::class, 'update']);
+    // Удаление корзины
+    Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 });
