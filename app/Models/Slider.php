@@ -9,7 +9,7 @@ class Slider extends Model
 {
     use HasFactory;
 
-    protected $fillable = [];
+    protected $fillable = ['photo_id'];
 
     protected $hidden = [
         'created_at',

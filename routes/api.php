@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShiftController;
+use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -46,6 +47,9 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 
 // Просмотр всех фотографий
 Route::get('/photos', [PhotoController::class, 'index']);
+
+// Просмотр всех акций
+Route::get('/promotions', [PromotionController::class, 'index']);
 
 // Роуты для авторизированных пользователей
 Route::middleware('auth:api')->group(function () {
@@ -165,8 +169,6 @@ Route::middleware('auth:api')->group(function () {
     // АКЦИЯ
     // Добавление акции
     Route::post('/promotions', [PromotionController::class, 'create']);
-    // Просмотр всех акций
-    Route::get('/promotions', [PromotionController::class, 'index']);
     // Просмотр акции
     Route::get('/promotions/{id}', [PromotionController::class, 'show']);
     // Редактирование акции
@@ -208,15 +210,15 @@ Route::middleware('auth:api')->group(function () {
     // Удаление новостной фотографии
     Route::delete('/article-photos/{id}', [ArticlePhotoController::class, 'destroy']);
 
-//    // СЛАЙДЕР
-//    // Добавление фотографии в слайдер
-//    Route::post('/slider', [SliderController::class, 'add']);
-//    // Просмотр всех фотографий в слайдере
-//    Route::get('/articles', [SliderController::class, 'index']);
-//    // Редактирование фотографий в слайдере
-//    Route::post('/articles/{id}', [SliderController::class, 'update']);
-//    // Удаление фотографий в слайдере
-//    Route::delete('/articles/{id}', [SliderController::class, 'destroy']);
+    // СЛАЙДЕР
+    // Добавление фотографии в слайдер
+    Route::post('/slider', [SliderController::class, 'add']);
+    // Просмотр всех фотографий в слайдере
+    Route::get('/slider', [SliderController::class, 'index']);
+    // Редактирование фотографий в слайдере
+    Route::post('/slider/{id}', [SliderController::class, 'update']);
+    // Удаление фотографий в слайдере
+    Route::delete('/slider/{id}', [SliderController::class, 'destroy']);
 
     // КОРЗИНА
     // Добавление корзины
