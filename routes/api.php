@@ -51,6 +51,11 @@ Route::get('/photos', [PhotoController::class, 'index']);
 // Просмотр всех акций
 Route::get('/promotions', [PromotionController::class, 'index']);
 
+// Просмотр всех новостей
+Route::get('/articles', [ArticleController::class, 'index']);
+// Просмотр новости
+Route::get('/articles/{id}', [ArticleController::class, 'show']);
+
 // Роуты для авторизированных пользователей
 Route::middleware('auth:api')->group(function () {
     // Выход
@@ -179,10 +184,6 @@ Route::middleware('auth:api')->group(function () {
     // НОВОСТИ
     // Добавление новости
     Route::post('/articles', [ArticleController::class, 'create']);
-    // Просмотр всех новостей
-    Route::get('/articles', [ArticleController::class, 'index']);
-    // Просмотр новости
-    Route::get('/articles/{id}', [ArticleController::class, 'show']);
     // Редактирование новости
     Route::post('/articles/{id}', [ArticleController::class, 'update']);
     // Удаление новости
