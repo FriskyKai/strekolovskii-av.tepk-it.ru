@@ -53,6 +53,9 @@ Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
 // Просмотр новостной фотографии
 Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
 
+// Просмотр всех фотографий в слайдере
+Route::get('/slider', [SliderController::class, 'index']);
+
 // Просмотр всех акций
 Route::get('/promotions', [PromotionController::class, 'index']);
 
@@ -220,11 +223,9 @@ Route::middleware('auth:api')->group(function () {
     // СЛАЙДЕР
     // Добавление фотографии в слайдер
     Route::post('/slider', [SliderController::class, 'add']);
-    // Просмотр всех фотографий в слайдере
-    Route::get('/slider', [SliderController::class, 'index']);
-    // Редактирование фотографий в слайдере
+    // Редактирование фотографии в слайдере
     Route::post('/slider/{id}', [SliderController::class, 'update']);
-    // Удаление фотографий в слайдере
+    // Удаление фотографии в слайдере
     Route::delete('/slider/{id}', [SliderController::class, 'destroy']);
 
     // КОРЗИНА
