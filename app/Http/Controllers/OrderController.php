@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderCreateRequest;
 use App\Http\Requests\OrderUpdateRequest;
+use App\Http\Resources\OrderResource;
 use App\Models\Order;
 use Illuminate\Http\Request;
 
@@ -13,13 +14,13 @@ class OrderController extends Controller
     public function create(OrderCreateRequest $request) {
         $order = Order::create($request->all());
 
-        return response()->json($order)->setStatusCode(201);
+        return response()->json(new OrderResource($order))->setStatusCode(201);
     }
 
     // Просмотр всех заказов
     public function index() {
         $orders = Order::all();
-        return response()->json($orders)->setStatusCode(200, 'Успешно');
+        return response()->json(OrderResource::collection($orders))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр заказа
@@ -30,7 +31,7 @@ class OrderController extends Controller
             return response()->json('Заказ не найден')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($order)->setStatusCode(200, 'Успешно');
+        return response()->json(new OrderResource($order))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование заказа
@@ -42,7 +43,7 @@ class OrderController extends Controller
         }
 
         $order->update($request->all());
-        return response()->json($order)->setStatusCode(200, 'Изменено');
+        return response()->json(new OrderResource($order))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление заказа

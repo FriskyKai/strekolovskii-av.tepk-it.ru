@@ -16,7 +16,6 @@ class ArticleCreateRequest extends ApiRequest
         return [
             'title' => 'required|string|max:64',
             'description' => 'required|string|max:1500',
-            'date' => 'required|date',
         ];
     }
 }

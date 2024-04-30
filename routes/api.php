@@ -48,6 +48,11 @@ Route::get('/products/{id}', [ProductController::class, 'show']);
 // Просмотр всех фотографий
 Route::get('/photos', [PhotoController::class, 'index']);
 
+// Просмотр всех новостных фотографий
+Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
+// Просмотр новостной фотографии
+Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
+
 // Просмотр всех акций
 Route::get('/promotions', [PromotionController::class, 'index']);
 
@@ -145,13 +150,18 @@ Route::middleware('auth:api')->group(function () {
     // Удаление добавки
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
+//    # Нужно будет доредачить
 //    // СОСТАВ ЗАКАЗА_ДОБАВКА
 //    // Просмотр всех добавок в составах заказов
 //    Route::get('/order-list-additives', [OrderListAdditiveController::class, 'index']);
 //    // Просмотр всех добавок в составе заказа
 //    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
 //    // Добавление добавки в состав заказа
-//    Route::post('/order-list-additives/{id}', [OrderListAdditiveController::class, 'create']);
+//    Route::post('/order-list-additives', [OrderListAdditiveController::class, 'create']);
+//    // Просмотр добавки в составе заказа
+//    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
+//    // Редактирование добавки в составе заказа
+//    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
 //    // Удаление добавки из состава заказа
 //    Route::delete('/order-list-additives/{id}', [OrderListAdditiveController::class, 'destroy']);
 
@@ -202,10 +212,6 @@ Route::middleware('auth:api')->group(function () {
     // НОВОСТЬ_ФОТОГРАФИЯ
     // Добавление новостной фотографии
     Route::post('/article-photos', [ArticlePhotoController::class, 'create']);
-    // Просмотр всех новостных фотографий
-    Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
-    // Просмотр новостной фотографии
-    Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
     // Редактирование новостной фотографии
     Route::post('/article-photos/{id}', [ArticlePhotoController::class, 'update']);
     // Удаление новостной фотографии

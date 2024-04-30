@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -13,16 +14,16 @@ class ProductController extends Controller
     public function create(ProductCreateRequest $request) {
         $product = Product::create($request->all());
 
-        return response()->json($product)->setStatusCode(201);
+        return response()->json(new ProductResource($product))->setStatusCode(201);
     }
 
     // Просмотр всех товаров
     public function index() {
         $products = Product::all();
-        return response()->json($products)->setStatusCode(200, 'Успешно');
+        return response()->json(ProductResource::collection($products))->setStatusCode(200, 'Успешно');
     }
 
-    // Просмотр товаров
+    // Просмотр товара
     public function show($id) {
         $product = Product::find($id);
 
@@ -30,7 +31,7 @@ class ProductController extends Controller
             return response()->json('Продукт не найден')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($product)->setStatusCode(200, 'Успешно');
+        return response()->json(new ProductResource($product))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование товара
@@ -42,7 +43,7 @@ class ProductController extends Controller
         }
 
         $product->update($request->all());
-        return response()->json($product)->setStatusCode(200, 'Изменено');
+        return response()->json(new ProductResource($product))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление товара

@@ -9,7 +9,7 @@ class Photo extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['path', 'article_id'];
+    protected $fillable = ['path'];
 
     protected $hidden = [
         'created_at',

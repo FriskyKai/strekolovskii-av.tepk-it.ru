@@ -16,7 +16,6 @@ class ArticleUpdateRequest extends ApiRequest
         return [
             'title' => 'string|max:64',
             'description' => 'string|max:1500',
-            'date' => 'date',
         ];
     }
 }

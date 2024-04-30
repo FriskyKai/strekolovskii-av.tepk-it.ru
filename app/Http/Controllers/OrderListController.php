@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\OrderListCreateRequest;
 use App\Http\Requests\OrderListUpdateRequest;
+use App\Http\Resources\OrderListResource;
 use App\Models\OrderList;
 use Illuminate\Http\Request;
 
@@ -13,13 +14,13 @@ class OrderListController extends Controller
     public function create(OrderListCreateRequest $request) {
         $orderList = OrderList::create($request->all());
 
-        return response()->json($orderList)->setStatusCode(201);
+        return response()->json(new OrderListResource($orderList))->setStatusCode(201);
     }
 
     // Просмотр всех составов заказов
     public function index() {
         $orderLists = OrderList::all();
-        return response()->json($orderLists)->setStatusCode(200, 'Успешно');
+        return response()->json(OrderListResource::collection($orderLists))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр состава заказа
@@ -30,7 +31,7 @@ class OrderListController extends Controller
             return response()->json('Состав заказа не найден')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($orderList)->setStatusCode(200, 'Успешно');
+        return response()->json(new OrderListResource($orderList))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование состава заказа
@@ -42,7 +43,7 @@ class OrderListController extends Controller
         }
 
         $orderList->update($request->all());
-        return response()->json($orderList)->setStatusCode(200, 'Изменено');
+        return response()->json(new OrderListResource($orderList))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление состава заказа

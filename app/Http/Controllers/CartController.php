@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CartCreateRequest;
 use App\Http\Requests\CartUpdateRequest;
+use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use Illuminate\Http\Request;
 
@@ -13,13 +14,13 @@ class CartController extends Controller
     public function create(CartCreateRequest $request) {
         $cart = Cart::create($request->all());
 
-        return response()->json($cart)->setStatusCode(201);
+        return response()->json(new CartResource($cart))->setStatusCode(201);
     }
 
     // Просмотр всех корзин
     public function index() {
         $carts = Cart::all();
-        return response()->json($carts)->setStatusCode(200, 'Успешно');
+        return response()->json(CartResource::collection($carts))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр корзины
@@ -30,7 +31,7 @@ class CartController extends Controller
             return response()->json('Корзина не найдена')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($cart)->setStatusCode(200, 'Успешно');
+        return response()->json(new CartResource($cart))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование корзины
@@ -42,7 +43,7 @@ class CartController extends Controller
         }
 
         $cart->update($request->all());
-        return response()->json($cart)->setStatusCode(200, 'Изменено');
+        return response()->json(new CartResource($cart))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление корзины

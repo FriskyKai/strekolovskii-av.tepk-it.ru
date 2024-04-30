@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exceptions\ApiException;
 use App\Http\Requests\ApiRequest;
 use App\Http\Requests\UserUpdateRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class UserController extends Controller
     // Просмотр всех пользователей
     public function index() {
         $users = User::all();
-        return response()->json($users)->setStatusCode(200, 'Успешно');
+        return response()->json(UserResource::collection($users))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр пользователя
@@ -24,7 +25,7 @@ class UserController extends Controller
             return response()->json('Пользователь не найден')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($user)->setStatusCode(200, 'Успешно');
+        return response()->json(new UserResource($user))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование пользователя
@@ -36,7 +37,7 @@ class UserController extends Controller
         }
 
         $user->update($request->all());
-        return response()->json($user)->setStatusCode(200, 'Изменено');
+        return response()->json(new UserResource($user))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление пользователя
@@ -55,6 +56,6 @@ class UserController extends Controller
     public function profile() {
         $user = auth()->user();
 
-        return response()->json(['data' => $user]);
+        return response()->json(['data' => new UserResource($user)]);
     }
 }

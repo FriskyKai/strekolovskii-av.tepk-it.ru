@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ShiftCreateRequest;
 use App\Http\Requests\ShiftUpdateRequest;
+use App\Http\Resources\ShiftResource;
 use App\Models\Shift;
 use Illuminate\Http\Request;
 
@@ -13,13 +14,13 @@ class ShiftController extends Controller
     public function create(ShiftCreateRequest $request) {
         $shift = Shift::create($request->all());
 
-        return response()->json($shift)->setStatusCode(201);
+        return response()->json(new ShiftResource($shift))->setStatusCode(201);
     }
 
     // Просмотр всех смен
     public function index() {
         $shifts = Shift::all();
-        return response()->json($shifts)->setStatusCode(200, 'Успешно');
+        return response()->json(ShiftResource::collection($shifts))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр смены
@@ -30,7 +31,7 @@ class ShiftController extends Controller
             return response()->json('Смена не найдена')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($shift)->setStatusCode(200, 'Успешно');
+        return response()->json(new ShiftResource($shift))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование смены
@@ -42,7 +43,7 @@ class ShiftController extends Controller
         }
 
         $shift->update($request->all());
-        return response()->json($shift)->setStatusCode(200, 'Изменено');
+        return response()->json(new ShiftResource($shift))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление смены
