@@ -20,6 +20,7 @@ class SliderController extends Controller
     // Просмотр всех фотографий в слайдере
     public function index() {
         $photos = Slider::all();
+
         return response()->json(SliderResource::collection($photos))->setStatusCode(200, 'Успешно');
     }
 
