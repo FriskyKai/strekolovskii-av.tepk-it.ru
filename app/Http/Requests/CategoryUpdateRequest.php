@@ -14,7 +14,7 @@ class CategoryUpdateRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|min:3|max:64'
+            'name' => 'string|min:3|max:64|unique:categories'
         ];
     }
 }

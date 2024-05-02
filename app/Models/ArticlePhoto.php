@@ -14,6 +14,11 @@ class ArticlePhoto extends Model
         'photo_id'
     ];
 
+    protected $hidden = [
+        'created_at',
+        'updated_at',
+    ];
+
     // Связи
     public function article() {
         return $this->belongsTo(Article::class);

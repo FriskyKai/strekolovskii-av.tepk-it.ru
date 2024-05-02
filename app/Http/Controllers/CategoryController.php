@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Exceptions\ApiException;
 use App\Http\Requests\CategoryCreateRequest;
 use App\Http\Requests\CategoryUpdateRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -32,6 +34,11 @@ class CategoryController extends Controller
         }
 
         return response()->json($category)->setStatusCode(200, 'Успешно');
+    }
+
+    public function showProducts($id){
+        $products = Product::where('category_id', $id)->get();
+        return response(['data' => ProductResource::collection($products)]);
     }
 
     // Редактирование категории

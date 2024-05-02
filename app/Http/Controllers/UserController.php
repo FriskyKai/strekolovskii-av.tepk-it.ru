@@ -51,11 +51,4 @@ class UserController extends Controller
         User::destroy($id);
         return response()->json('Пользователь удален')->setStatusCode(200, 'Удалено');
     }
-
-    // Профиль пользователя
-    public function profile() {
-        $user = auth()->user();
-
-        return response()->json(['data' => new UserResource($user)]);
-    }
 }

@@ -14,7 +14,7 @@ class ProductCreateRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:2|max:64',
+            'name' => 'required|string|min:2|max:64|unique:products',
             'new' => 'required|boolean',
             'bestseller' => 'required|boolean',
             'price' => 'required|integer',

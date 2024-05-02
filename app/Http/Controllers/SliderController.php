@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SliderAddRequest;
 use App\Http\Requests\SliderUpdateRequest;
+use App\Http\Resources\SliderResource;
 use App\Models\Slider;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class SliderController extends Controller
     // Просмотр всех фотографий в слайдере
     public function index() {
         $photos = Slider::all();
-        return response()->json($photos)->setStatusCode(200, 'Успешно');
+        return response()->json(SliderResource::collection($photos))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование фотографии в слайдере

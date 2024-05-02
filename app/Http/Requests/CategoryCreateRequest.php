@@ -14,7 +14,7 @@ class CategoryCreateRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|min:3|max:64'
+            'name' => 'required|string|min:3|max:64|unique:categories'
         ];
     }
 }

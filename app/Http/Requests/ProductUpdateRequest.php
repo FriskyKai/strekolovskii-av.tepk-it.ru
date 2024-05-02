@@ -14,7 +14,7 @@ class ProductUpdateRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            'name' => 'string|min:2|max:64',
+            'name' => 'string|min:2|max:64|unique:products',
             'new' => 'boolean',
             'bestseller' => 'boolean',
             'price' => 'integer',
