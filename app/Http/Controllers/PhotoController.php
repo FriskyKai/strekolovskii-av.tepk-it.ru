@@ -13,23 +13,23 @@ class PhotoController extends Controller
     // Добавление фотографии
     public function store(PhotoStoreRequest $request)
     {
-        // Проверяем, есть ли файлы для загрузки
         if ($request->hasFile('photos')) {
             $uploadedPhotos = [];
 
             foreach ($request->file('photos') as $photo) {
-                // Сохраняем фотографию в хранилище
-                $path = $photo->store('photos/');
+                $originalName = $photo->getClientOriginalName();
 
-                // Создаем запись о фотографии в базе данных
+                $pathWithPrefix = 'photos/' . $originalName;
+                $path = $photo->storeAs('public/photos', $originalName);
+
                 $uploadedPhoto = new Photo();
-                $uploadedPhoto->path = $path;
+                $uploadedPhoto->path = $pathWithPrefix;
                 $uploadedPhoto->save();
 
-                // Добавляем информацию о загруженной фотографии в массив ответа
                 $uploadedPhotos[] = [
                     'message' => 'Success',
-                    'url' => Storage::url($path), // URL для доступа к фото через хранилище
+                    'local_url' => Storage::url('app/' . $path),
+                    'global_url' => '/public/storage/' . $pathWithPrefix
                 ];
             }
 
@@ -78,7 +78,7 @@ class PhotoController extends Controller
         // Обновляем имя файла в хранилище
         if ($newPath && $newFileName && $currentPath !== $newPath) {
             // Удаляем старый файл из хранилища, только если путь изменился
-            Storage::move($currentPath, 'photos/' . $newFileName);
+            Storage::move($currentPath, 'public/photos' . $newFileName);
 
             // Обновляем путь к фотографии в базе данных
             $photo->path = 'photos/' . $newFileName;
@@ -99,7 +99,7 @@ class PhotoController extends Controller
             return response()->json('Фотография не найдена')->setStatusCode(404, 'Not found');
         }
 
-        Storage::delete($photo->path);
+        Storage::delete('public/' . $photo->path);
 
         $photo->delete();
 
