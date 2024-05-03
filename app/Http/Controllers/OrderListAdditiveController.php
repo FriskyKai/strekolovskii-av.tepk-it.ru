@@ -2,55 +2,66 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\OrderListAdditiveCreateRequest;
+use App\Http\Requests\OrderListAdditiveUpdateRequest;
+use App\Http\Resources\OrderListAdditiveResource;
+use App\Models\OrderListAdditive;
 use Illuminate\Http\Request;
 
 class OrderListAdditiveController extends Controller
 {
-    // Создание новостной фотографии
-    public function create(ArticlePhotoCreateRequest $request) {
-        $articlePhoto = ArticlePhoto::create($request->all());
+    // Добавление добавки в состав заказа
+    public function create(OrderListAdditiveCreateRequest $request) {
+        $orderListAdditive = OrderListAdditive::create($request->all());
 
-        return response()->json($articlePhoto)->setStatusCode(201);
+        return response()->json(new OrderListAdditiveResource($orderListAdditive))->setStatusCode(201);
     }
 
-    // Просмотр всех новостных фотографий
+    // Просмотр всех записей состав заказа_добавка
     public function index() {
-        $articlePhotos = ArticlePhoto::all();
-        return response()->json($articlePhotos)->setStatusCode(200, 'Успешно');
+        $orderListAdditives = OrderListAdditive::all();
+        return response()->json(OrderListAdditiveResource::collection($orderListAdditives))->setStatusCode(200, 'Успешно');
     }
 
-    // Просмотр новостной фотографии
+    // Просмотр всех добавок в составе заказа
+    public function showByOrderList($id){
+        $orderListAdditives = OrderListAdditive::where('order_list_id', $id)->get();
+
+        return response(OrderListAdditiveResource::collection($orderListAdditives));
+    }
+
+    // Просмотр добавки в составе заказа
     public function show($id) {
-        $articlePhoto = ArticlePhoto::find($id);
+        $orderListAdditive = OrderListAdditive::find($id);
 
-        if (!$articlePhoto) {
-            return response()->json('Новостная фотография не найдена')->setStatusCode(404, 'Not found');
+        if (!$orderListAdditive) {
+            return response()->json('Добавка в составе заказа не найдена')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($articlePhoto)->setStatusCode(200, 'Успешно');
+        return response()->json(new OrderListAdditiveResource($orderListAdditive))->setStatusCode(200, 'Успешно');
     }
 
-    // Редактирование новостной фотографии
-    public function update(ArticlePhotoUpdateRequest $request, $id) {
-        $articlePhoto = ArticlePhoto::find($id);
+    // Редактирование добавки в составе заказа
+    public function update(OrderListAdditiveUpdateRequest $request, $id) {
+        $orderListAdditive = OrderListAdditive::find($id);
 
-        if (!$articlePhoto) {
-            return response()->json('Новостная фотография не найдена')->setStatusCode(404, 'Not found');
+        if (!$orderListAdditive) {
+            return response()->json('Добавка в составе заказа не найдена')->setStatusCode(404, 'Not found');
         }
 
-        $articlePhoto->update($request->all());
-        return response()->json($articlePhoto)->setStatusCode(200, 'Изменено');
+        $orderListAdditive->update($request->all());
+        return response()->json(new OrderListAdditiveResource($orderListAdditive))->setStatusCode(200, 'Изменено');
     }
 
-    // Удаление новостной фотографии
+    // Удаление добавки из состава заказа
     public function destroy($id) {
-        $articlePhoto = ArticlePhoto::find($id);
+        $orderListAdditive = OrderListAdditive::find($id);
 
-        if (!$articlePhoto) {
-            return response()->json('Новостная фотография не найдена')->setStatusCode(404, 'Not found');
+        if (!$orderListAdditive) {
+            return response()->json('Добавка в составе заказа не найдена')->setStatusCode(404, 'Not found');
         }
 
-        ArticlePhoto::destroy($id);
-        return response()->json('Новостная фотография удалена')->setStatusCode(200, 'Удалено');
+        OrderListAdditive::destroy($id);
+        return response()->json('Добавка в составе заказа удалена')->setStatusCode(200, 'Удалено');
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ArticlePhotoCreateRequest;
 use App\Http\Requests\ArticlePhotoUpdateRequest;
+use App\Http\Resources\ArticlePhotoResource;
 use App\Models\ArticlePhoto;
 use Illuminate\Http\Request;
 
@@ -13,13 +14,20 @@ class ArticlePhotoController extends Controller
     public function create(ArticlePhotoCreateRequest $request) {
         $articlePhoto = ArticlePhoto::create($request->all());
 
-        return response()->json($articlePhoto)->setStatusCode(201);
+        return response()->json(new ArticlePhotoResource($articlePhoto))->setStatusCode(201);
     }
 
     // Просмотр всех новостных фотографий
     public function index() {
         $articlePhotos = ArticlePhoto::all();
-        return response()->json($articlePhotos)->setStatusCode(200, 'Успешно');
+        return response()->json(ArticlePhotoResource::collection($articlePhotos))->setStatusCode(200, 'Успешно');
+    }
+
+    // Просмотр всех новостных фотографий по новости
+    public function showByArticle($id) {
+        $articlePhotos = ArticlePhoto::where('article_id', $id)->get();
+
+        return response()->json(ArticlePhotoResource::collection($articlePhotos))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр новостной фотографии
@@ -30,7 +38,7 @@ class ArticlePhotoController extends Controller
             return response()->json('Новостная фотография не найдена')->setStatusCode(404, 'Not found');
         }
 
-        return response()->json($articlePhoto)->setStatusCode(200, 'Успешно');
+        return response()->json(new ArticlePhotoResource($articlePhoto))->setStatusCode(200, 'Успешно');
     }
 
     // Редактирование новостной фотографии
@@ -42,7 +50,7 @@ class ArticlePhotoController extends Controller
         }
 
         $articlePhoto->update($request->all());
-        return response()->json($articlePhoto)->setStatusCode(200, 'Изменено');
+        return response()->json(new ArticlePhotoResource($articlePhoto))->setStatusCode(200, 'Изменено');
     }
 
     // Удаление новостной фотографии

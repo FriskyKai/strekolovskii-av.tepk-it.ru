@@ -23,6 +23,13 @@ class OrderListController extends Controller
         return response()->json(OrderListResource::collection($orderLists))->setStatusCode(200, 'Успешно');
     }
 
+    // Просмотр всех составов заказа по номеру заказа
+    public function showByOrder($id) {
+        $orderLists = OrderList::where('order_id', $id)->get();
+
+        return response()->json(OrderListResource::collection($orderLists))->setStatusCode(200, 'Успешно');
+    }
+
     // Просмотр состава заказа
     public function show($id) {
         $orderList = OrderList::find($id);

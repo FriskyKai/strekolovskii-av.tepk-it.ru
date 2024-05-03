@@ -24,6 +24,13 @@ class ProductController extends Controller
         return response()->json(ProductResource::collection($products))->setStatusCode(200, 'Успешно');
     }
 
+    // Просмотр всех товаров по категории
+    public function showByCategory($id){
+        $products = Product::where('category_id', $id)->get();
+
+        return response(ProductResource::collection($products));
+    }
+
     // Просмотр товара
     public function show($id) {
         $product = Product::find($id);

@@ -36,11 +36,6 @@ class CategoryController extends Controller
         return response()->json($category)->setStatusCode(200, 'Успешно');
     }
 
-    public function showProducts($id){
-        $products = Product::where('category_id', $id)->get();
-        return response(['data' => ProductResource::collection($products)]);
-    }
-
     // Редактирование категории
     public function update(CategoryUpdateRequest $request, $id) {
         $category = Category::find($id);

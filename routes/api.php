@@ -8,6 +8,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\OrderListAdditiveController;
 use App\Http\Controllers\OrderListController;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
@@ -41,16 +42,18 @@ Route::get('/categories', [CategoryController::class, 'index']);
 
 // Просмотр всех товаров
 Route::get('/products', [ProductController::class, 'index']);
+// Просмотр всех товаров по категории
+Route::get('/products/category/{id}', [ProductController::class, 'showByCategory']);
 // Просмотр товара
 Route::get('/products/{id}', [ProductController::class, 'show']);
-// Просмотр товаров по категории
-Route::get('/products/{id}/list', [CategoryController::class, 'showProducts']);
 
 // Просмотр всех фотографий
 Route::get('/photos', [PhotoController::class, 'index']);
 
 // Просмотр всех новостных фотографий
 Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
+// Просмотр всех новостных фотографий по новости
+Route::get('/article-photos/article/{id}', [ArticlePhotoController::class, 'showByArticle']);
 // Просмотр новостной фотографии
 Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
 
@@ -139,6 +142,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/order-lists', [OrderListController::class, 'create']);
     // Просмотр всех составов заказов
     Route::get('/order-lists', [OrderListController::class, 'index']);
+    // Просмотр всех составов заказа по номеру заказа
+    Route::get('/order-lists/order/{id}', [OrderListController::class, 'showByOrder']);
     // Просмотр состава заказа
     Route::get('/order-lists/{id}', [OrderListController::class, 'show']);
     // Редактирование состава заказа
@@ -158,21 +163,19 @@ Route::middleware('auth:api')->group(function () {
     // Удаление добавки
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
-//    # Нужно будет доредачить
-//    // СОСТАВ ЗАКАЗА_ДОБАВКА
-//    // Добавление добавки в состав заказа
-//    Route::post('/order-list-additives', [OrderListAdditiveController::class, 'create']);
-//    // Просмотр всех добавок в составах заказов
-//    Route::get('/order-list-additives', [OrderListAdditiveController::class, 'index']);
-
-//    // Просмотр всех добавок в составе заказа
-//    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
-//    // Просмотр добавки в составе заказа
-//    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
-//    // Редактирование добавки в составе заказа
-//    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'index']);
-//    // Удаление добавки из состава заказа
-//    Route::delete('/order-list-additives/{id}', [OrderListAdditiveController::class, 'destroy']);
+    // СОСТАВ ЗАКАЗА_ДОБАВКА
+    // Добавление добавки в состав заказа
+    Route::post('/order-list-additives', [OrderListAdditiveController::class, 'create']);
+    // Просмотр всех записей состав заказа_добавка
+    Route::get('/order-list-additives', [OrderListAdditiveController::class, 'index']);
+    // Просмотр всех добавок в составе заказа
+    Route::get('/order-list-additives/order-list/{id}', [OrderListAdditiveController::class, 'showByOrderList']);
+    // Просмотр добавки в составе заказа
+    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'show']);
+    // Редактирование добавки в составе заказа
+    Route::get('/order-list-additives/{id}', [OrderListAdditiveController::class, 'update']);
+    // Удаление добавки из состава заказа
+    Route::delete('/order-list-additives/{id}', [OrderListAdditiveController::class, 'destroy']);
 
     // ТОВАР
     // Добавление товара
@@ -221,10 +224,6 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/photos/{id}', [PhotoController::class, 'destroy']);
 
     // НОВОСТЬ_ФОТОГРАФИЯ
-//    // Просмотр всех новостных фотографий
-//    Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
-//    // Просмотр новостной фотографии
-//    Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
     // Добавление новостной фотографии
     Route::post('/article-photos', [ArticlePhotoController::class, 'create']);
     // Редактирование новостной фотографии
