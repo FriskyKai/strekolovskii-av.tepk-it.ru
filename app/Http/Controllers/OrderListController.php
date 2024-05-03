@@ -49,7 +49,12 @@ class OrderListController extends Controller
             return response()->json('Состав заказа не найден')->setStatusCode(404, 'Not found');
         }
 
-        $orderList->update($request->all());
+        $orderList->fill($request->all());
+
+        $orderList->total = $orderList->count * $orderList->price;
+
+        $orderList->save();
+
         return response()->json(new OrderListResource($orderList))->setStatusCode(200, 'Изменено');
     }
 

@@ -18,7 +18,6 @@ class OrderListCreateRequest extends ApiRequest
             'product_id' => 'required|integer|exists:products,id',
             'count' => 'required|integer|min:1',
             'price' => 'required|integer',
-            'total' => 'required|integer',
         ];
     }
 }

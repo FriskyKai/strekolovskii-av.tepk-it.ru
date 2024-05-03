@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\UserController;
@@ -250,4 +251,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/carts/{id}', [CartController::class, 'update']);
     // Удаление корзины
     Route::delete('/carts/{id}', [CartController::class, 'destroy']);
+
+    // ИНФОРМАЦИЯ ПО ПРОДАЖАМ
+    // Просмотр всех продаж за период (день/месяц/год)
+    Route::post('/sales', [SaleController::class, 'getSalesByPeriod']);
+    // Просмотр продаж по позиции за период (день/месяц/год)
+    Route::post('/sales/{id}', [SaleController::class, 'getSalesByPeriodAndProduct']);
 });

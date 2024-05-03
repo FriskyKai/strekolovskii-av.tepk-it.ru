@@ -10,15 +10,28 @@ class OrderList extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
+        'product_id',
         'count',
         'price',
-        'total',
     ];
 
     protected $hidden = [
         'created_at',
         'updated_at',
     ];
+
+    // Автоматически вычисляем поле total перед сохранением
+    protected static function boot()
+    {
+        parent::boot();
+
+        // Событие перед сохранением
+        static::saving(function ($orderList) {
+            // Пересчитываем поле total как произведение count * price
+            $orderList->total = $orderList->count * $orderList->price;
+        });
+    }
 
     // Связи
     public function orderListAdditives() {
