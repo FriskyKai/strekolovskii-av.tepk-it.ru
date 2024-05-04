@@ -245,6 +245,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/carts', [CartController::class, 'create']);
     // Просмотр всех корзин
     Route::get('/carts', [CartController::class, 'index']);
+    // Просмотр всех товаров в корзине по пользователю
+    Route::get('/carts/user/{id}', [CartController::class, 'showByUser']);
     // Просмотр корзины
     Route::get('/carts/{id}', [CartController::class, 'show']);
     // Редактирование корзины

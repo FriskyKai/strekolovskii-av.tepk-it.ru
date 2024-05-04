@@ -23,6 +23,13 @@ class CartController extends Controller
         return response()->json(CartResource::collection($carts))->setStatusCode(200, 'Успешно');
     }
 
+    // Просмотр всех товаров в корзине по пользователю
+    public function showByUser($id) {
+        $carts = Cart::where('user_id', $id)->get();
+
+        return response()->json(CartResource::collection($carts))->setStatusCode(200, 'Успешно');
+    }
+
     // Просмотр корзины
     public function show($id) {
         $cart = Cart::find($id);

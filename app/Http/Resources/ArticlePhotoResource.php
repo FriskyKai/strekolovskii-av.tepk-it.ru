@@ -17,7 +17,7 @@ class ArticlePhotoResource extends JsonResource
         return [
             'id' => $this->id,
             'article' => $this->article_id,
-            'photo' => $this->photo_id,
+            'photo' => $this->photo->path,
         ];
     }
 }
