@@ -107,6 +107,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/shifts', [ShiftController::class, 'create']);
     // Просмотр всех смен
     Route::get('/shifts', [ShiftController::class, 'index']);
+    // Просмотр текущей смены пользователя
+    Route::get('/shifts/user/{id}', [ShiftController::class, 'showByUser']);
     // Просмотр смены
     Route::get('/shifts/{id}', [ShiftController::class, 'show']);
     // Редактирование смены

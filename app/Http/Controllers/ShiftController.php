@@ -23,6 +23,13 @@ class ShiftController extends Controller
         return response()->json(ShiftResource::collection($shifts))->setStatusCode(200, 'Успешно');
     }
 
+    // Просмотр текущей смены пользователя
+    public function showByUser($id) {
+        $shift = Shift::where('user_id', $id)->get()->last();
+
+        return response()->json(new ShiftResource($shift))->setStatusCode(200, 'Успешно');
+    }
+
     // Просмотр смены
     public function show($id) {
         $shift = Shift::find($id);
