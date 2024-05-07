@@ -75,16 +75,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/logout', [AuthController::class, 'logout']);
 
     // РОЛЬ
-    // Добавление роли
-    Route::post('/roles', [RoleController::class, 'create']);
     // Просмотр всех ролей
     Route::get('/roles', [RoleController::class, 'index']);
     // Просмотр роли
     Route::get('/roles/{id}', [RoleController::class, 'show']);
-    // Редактирование роли
-    Route::post('/roles/{id}', [RoleController::class, 'update']);
-    // Удаление роли
-    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
 
     // ПОЛЬЗОВАТЕЛЬ
     // Просмотр всех пользователей
@@ -131,15 +125,16 @@ Route::middleware('auth:api')->group(function () {
     // ЗАКАЗ
     // Добавление заказа
     Route::post('/orders', [OrderController::class, 'create']);
-    // Просмотр всех заказов
+    // Просмотр всех заказов пользователя
     Route::get('/orders', [OrderController::class, 'index']);
-    // Просмотр заказа
-    Route::get('/orders/{id}', [OrderController::class, 'show']);
-    // Редактирование заказа
-    Route::post('/orders/{id}', [OrderController::class, 'update']);
-    // Удаление заказа
-    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+    // Просмотр текущего заказа пользователя
+    Route::get('/orders/current', [OrderController::class, 'current']);
+//    // Редактирование заказа
+//    Route::post('/orders/{id}', [OrderController::class, 'update']);
+//    // Удаление заказа
+//    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
+    # Переработать под пользователя
     // СОСТАВ ЗАКАЗА
     // Добавление состава заказа
     Route::post('/order-lists', [OrderListController::class, 'create']);
@@ -166,6 +161,7 @@ Route::middleware('auth:api')->group(function () {
     // Удаление добавки
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
+    # Переработать под пользователя
     // СОСТАВ ЗАКАЗА_ДОБАВКА
     // Добавление добавки в состав заказа
     Route::post('/order-list-additives', [OrderListAdditiveController::class, 'create']);
