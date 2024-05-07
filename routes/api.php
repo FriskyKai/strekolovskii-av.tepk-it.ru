@@ -127,6 +127,8 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/orders', [OrderController::class, 'create']);
     // Просмотр всех заказов пользователя
     Route::get('/orders', [OrderController::class, 'index']);
+    // Просмотр всех заказов пользователя
+    Route::get('/orders/my', [OrderController::class, 'show']);
     // Просмотр текущего заказа пользователя
     Route::get('/orders/current', [OrderController::class, 'current']);
 //    // Редактирование заказа

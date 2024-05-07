@@ -25,9 +25,20 @@ class OrderController extends Controller
         return response()->json(new OrderResource($order))->setStatusCode(201);
     }
 
-    // Просмотр всех заказов пользователя
+    // Просмотр всех заказов
     public function index() {
-        $orders = Order::where('user_id', Auth::user()->id)->get();
+        $orders = Order::all();
+
+        if (!$orders) {
+            return response()->json('Заказов не найдено')->setStatusCode(404, 'Not found');
+        }
+
+        return response()->json(OrderResource::collection($orders))->setStatusCode(200, 'Успешно');
+    }
+
+    // Просмотр всех заказов пользователя
+    public function show() {
+        $orders = Order::where('user_id', Auth::user()->id)->get();;
 
         if (!$orders) {
             return response()->json('Заказов не найдено')->setStatusCode(404, 'Not found');
