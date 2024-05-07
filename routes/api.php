@@ -245,15 +245,13 @@ Route::middleware('auth:api')->group(function () {
     // КОРЗИНА
     // Добавление корзины
     Route::post('/carts', [CartController::class, 'create']);
-    // Просмотр всех корзин
+    // Просмотр всего содержимого корзины пользователя
     Route::get('/carts', [CartController::class, 'index']);
-    // Просмотр всех товаров в корзине по пользователю
-    Route::get('/carts/user/{id}', [CartController::class, 'showByUser']);
-    // Просмотр корзины
-    Route::get('/carts/{id}', [CartController::class, 'show']);
-    // Редактирование корзины
-    Route::post('/carts/{id}', [CartController::class, 'update']);
-    // Удаление корзины
+    // Увеличение кол-ва товара в корзине
+    Route::get('/carts/{id}/increase', [CartController::class, 'increase']);
+    // Уменьшение кол-ва товара в корзине
+    Route::get('/carts/{id}/decrease', [CartController::class, 'decrease']);
+    // Удаление товара из корзины
     Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 
     // ИНФОРМАЦИЯ ПО ПРОДАЖАМ

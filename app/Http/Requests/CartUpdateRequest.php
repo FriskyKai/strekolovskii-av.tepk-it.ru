@@ -14,7 +14,8 @@ class CartUpdateRequest extends ApiRequest
     public function rules(): array
     {
         return [
-            //
+            'product_id' => 'integer|exists:products,id',
+            'count' => 'integer|min:0|max:10'
         ];
     }
 }
