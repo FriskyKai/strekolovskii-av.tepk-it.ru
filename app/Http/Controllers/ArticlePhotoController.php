@@ -30,17 +30,6 @@ class ArticlePhotoController extends Controller
         return response()->json(ArticlePhotoResource::collection($articlePhotos))->setStatusCode(200, 'Успешно');
     }
 
-    // Просмотр новостной фотографии
-    public function show($id) {
-        $articlePhoto = ArticlePhoto::find($id);
-
-        if (!$articlePhoto) {
-            return response()->json('Новостная фотография не найдена')->setStatusCode(404, 'Not found');
-        }
-
-        return response()->json(new ArticlePhotoResource($articlePhoto))->setStatusCode(200, 'Успешно');
-    }
-
     // Редактирование новостной фотографии
     public function update(ArticlePhotoUpdateRequest $request, $id) {
         $articlePhoto = ArticlePhoto::find($id);

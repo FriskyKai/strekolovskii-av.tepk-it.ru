@@ -37,14 +37,21 @@ class OrderController extends Controller
     }
 
     // Просмотр всех заказов пользователя
-    public function show() {
-        $orders = Order::where('user_id', Auth::user()->id)->get();;
+    public function my() {
+        $orders = Order::where('user_id', Auth::user()->id)->get();
 
         if (!$orders) {
             return response()->json('Заказов не найдено')->setStatusCode(404, 'Not found');
         }
 
         return response()->json(OrderResource::collection($orders))->setStatusCode(200, 'Успешно');
+    }
+
+    // Просмотр заказа
+    public function show($id) {
+        $order = Order::find($id);
+
+        return response()->json(new OrderResource($order))->setStatusCode(200, 'Успешно');
     }
 
     // Просмотр текущего заказа пользователя
@@ -58,27 +65,27 @@ class OrderController extends Controller
         return response()->json(new OrderResource($order))->setStatusCode(200, 'Успешно');
     }
 
-//    // Редактирование заказа
-//    public function update(OrderUpdateRequest $request, $id) {
-//        $order = Order::find($id);
-//
-//        if (!$order) {
-//            return response()->json('Заказ не найден')->setStatusCode(404, 'Not found');
-//        }
-//
-//        $order->update($request->all());
-//        return response()->json(new OrderResource($order))->setStatusCode(200, 'Изменено');
-//    }
-//
-//    // Удаление заказа
-//    public function destroy($id) {
-//        $order = Order::find($id);
-//
-//        if (!$order) {
-//            return response()->json('Заказ не найден')->setStatusCode(404, 'Not found');
-//        }
-//
-//        Order::destroy($id);
-//        return response()->json('Заказ удален')->setStatusCode(200, 'Удалено');
-//    }
+    // Редактирование заказа
+    public function update(OrderUpdateRequest $request, $id) {
+        $order = Order::find($id);
+
+        if (!$order) {
+            return response()->json('Заказ не найден')->setStatusCode(404, 'Not found');
+        }
+
+        $order->update($request->all());
+        return response()->json(new OrderResource($order))->setStatusCode(200, 'Изменено');
+    }
+
+    // Удаление заказа
+    public function destroy($id) {
+        $order = Order::find($id);
+
+        if (!$order) {
+            return response()->json('Заказ не найден')->setStatusCode(404, 'Not found');
+        }
+
+        Order::destroy($id);
+        return response()->json('Заказ удален')->setStatusCode(200, 'Удалено');
+    }
 }

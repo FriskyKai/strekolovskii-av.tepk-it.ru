@@ -31,17 +31,6 @@ class ProductController extends Controller
         return response(ProductResource::collection($products));
     }
 
-    // Просмотр товара
-    public function show($id) {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return response()->json('Продукт не найден')->setStatusCode(404, 'Not found');
-        }
-
-        return response()->json(new ProductResource($product))->setStatusCode(200, 'Успешно');
-    }
-
     // Редактирование товара
     public function update(ProductUpdateRequest $request, $id) {
         $product = Product::find($id);

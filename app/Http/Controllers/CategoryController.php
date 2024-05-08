@@ -25,17 +25,6 @@ class CategoryController extends Controller
         return response()->json($categories)->setStatusCode(200, 'Успешно');
     }
 
-    // Просмотр категории
-    public function show($id) {
-        $category = Category::find($id);
-
-        if (!$category) {
-            return response()->json('Категория не найдена')->setStatusCode(404, 'Not found');
-        }
-
-        return response()->json($category)->setStatusCode(200, 'Успешно');
-    }
-
     // Редактирование категории
     public function update(CategoryUpdateRequest $request, $id) {
         $category = Category::find($id);

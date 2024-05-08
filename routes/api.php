@@ -18,6 +18,7 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\SliderController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -45,8 +46,6 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/products', [ProductController::class, 'index']);
 // Просмотр всех товаров по категории
 Route::get('/products/category/{id}', [ProductController::class, 'showByCategory']);
-// Просмотр товара
-Route::get('/products/{id}', [ProductController::class, 'show']);
 
 // Просмотр всех фотографий
 Route::get('/photos', [PhotoController::class, 'index']);
@@ -55,8 +54,6 @@ Route::get('/photos', [PhotoController::class, 'index']);
 Route::get('/article-photos', [ArticlePhotoController::class, 'index']);
 // Просмотр всех новостных фотографий по новости
 Route::get('/article-photos/article/{id}', [ArticlePhotoController::class, 'showByArticle']);
-// Просмотр новостной фотографии
-Route::get('/article-photos/{id}', [ArticlePhotoController::class, 'show']);
 
 // Просмотр всех фотографий в слайдере
 Route::get('/slider', [SliderController::class, 'index']);
@@ -73,12 +70,6 @@ Route::get('/articles/{id}', [ArticleController::class, 'show']);
 Route::middleware('auth:api')->group(function () {
     // Выход
     Route::get('/logout', [AuthController::class, 'logout']);
-
-    // РОЛЬ
-    // Просмотр всех ролей
-    Route::get('/roles', [RoleController::class, 'index']);
-    // Просмотр роли
-    Route::get('/roles/{id}', [RoleController::class, 'show']);
 
     // ПОЛЬЗОВАТЕЛЬ
     // Просмотр всех пользователей
@@ -115,8 +106,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/addresses', [AddressController::class, 'create']);
     // Просмотр всех адресов
     Route::get('/addresses', [AddressController::class, 'index']);
-    // Просмотр адреса
-    Route::get('/addresses/{id}', [AddressController::class, 'show']);
     // Редактирование адреса
     Route::post('/addresses/{id}', [AddressController::class, 'update']);
     // Удаление адреса
@@ -128,13 +117,15 @@ Route::middleware('auth:api')->group(function () {
     // Просмотр всех заказов пользователя
     Route::get('/orders', [OrderController::class, 'index']);
     // Просмотр всех заказов пользователя
-    Route::get('/orders/my', [OrderController::class, 'show']);
+    Route::get('/orders/my', [OrderController::class, 'showByUser']);
     // Просмотр текущего заказа пользователя
     Route::get('/orders/current', [OrderController::class, 'current']);
-//    // Редактирование заказа
-//    Route::post('/orders/{id}', [OrderController::class, 'update']);
-//    // Удаление заказа
-//    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
+    // Просмотр заказа
+    Route::get('/orders/{id}', [OrderController::class, 'show']);
+    // Редактирование заказа
+    Route::post('/orders/{id}', [OrderController::class, 'update']);
+    // Удаление заказа
+    Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
     # Переработать под пользователя
     // СОСТАВ ЗАКАЗА
@@ -189,8 +180,6 @@ Route::middleware('auth:api')->group(function () {
     // КАТЕГОРИЯ
     // Добавление категории
     Route::post('/categories', [CategoryController::class, 'create']);
-    // Просмотр категории
-    Route::get('/categories/{id}', [CategoryController::class, 'show']);
     // Редактирование категории
     Route::post('/categories/{id}', [CategoryController::class, 'update']);
     // Удаление категории
@@ -199,8 +188,6 @@ Route::middleware('auth:api')->group(function () {
     // АКЦИЯ
     // Добавление акции
     Route::post('/promotions', [PromotionController::class, 'create']);
-    // Просмотр акции
-    Route::get('/promotions/{id}', [PromotionController::class, 'show']);
     // Редактирование акции
     Route::post('/promotions/{id}', [PromotionController::class, 'update']);
     // Удаление акции
@@ -217,8 +204,6 @@ Route::middleware('auth:api')->group(function () {
     // ФОТОГРАФИИ
     // Добавление фотографии
     Route::post('/photos', [PhotoController::class, 'store']);
-    // Просмотр фотографии
-    Route::get('/photos/{id}', [PhotoController::class, 'show']);
     // Редактирование фотографии
     Route::post('/photos/{id}', [PhotoController::class, 'update']);
     // Удаление фотографии
@@ -241,7 +226,7 @@ Route::middleware('auth:api')->group(function () {
     Route::delete('/slider/{id}', [SliderController::class, 'destroy']);
 
     // КОРЗИНА
-    // Добавление корзины
+    // Добавление товара в корзину
     Route::post('/carts', [CartController::class, 'create']);
     // Просмотр всего содержимого корзины пользователя
     Route::get('/carts', [CartController::class, 'index']);
@@ -251,6 +236,8 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/carts/{id}/decrease', [CartController::class, 'decrease']);
     // Удаление товара из корзины
     Route::delete('/carts/{id}', [CartController::class, 'destroy']);
+
+    Route::get('/statuses', [StatusController::class, 'index']);
 
     // ИНФОРМАЦИЯ ПО ПРОДАЖАМ
     // Просмотр всех продаж за период (день/месяц/год)
