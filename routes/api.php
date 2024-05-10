@@ -140,6 +140,10 @@ Route::middleware('auth:api')->group(function () {
     // Удаление состава заказа
     Route::delete('/order-lists/{id}', [OrderListController::class, 'destroy']);
 
+    // СТАТУСЫ ЗАКАЗА
+    // Просмотр всех статусов
+    Route::get('/statuses', [StatusController::class, 'index']);
+
     // ДОБАВКА
     // Добавление добавки
     Route::post('/additives', [AdditiveController::class, 'create']);
@@ -198,30 +202,6 @@ Route::middleware('auth:api')->group(function () {
     // Удаление новости
     Route::delete('/articles/{id}', [ArticleController::class, 'destroy']);
 
-    // ФОТОГРАФИИ
-    // Добавление фотографии
-    Route::post('/photos', [PhotoController::class, 'store']);
-    // Редактирование фотографии
-    Route::post('/photos/{id}', [PhotoController::class, 'update']);
-    // Удаление фотографии
-    Route::delete('/photos/{id}', [PhotoController::class, 'destroy']);
-
-    // НОВОСТЬ_ФОТОГРАФИЯ
-    // Добавление новостной фотографии
-    Route::post('/article-photos', [ArticlePhotoController::class, 'create']);
-    // Редактирование новостной фотографии
-    Route::post('/article-photos/{id}', [ArticlePhotoController::class, 'update']);
-    // Удаление новостной фотографии
-    Route::delete('/article-photos/{id}', [ArticlePhotoController::class, 'destroy']);
-
-    // СЛАЙДЕР
-    // Добавление фотографии в слайдер
-    Route::post('/slider', [SliderController::class, 'add']);
-    // Редактирование фотографии в слайдере
-    Route::post('/slider/{id}', [SliderController::class, 'update']);
-    // Удаление фотографии в слайдере
-    Route::delete('/slider/{id}', [SliderController::class, 'destroy']);
-
     // КОРЗИНА
     // Добавление товара в корзину
     Route::post('/carts', [CartController::class, 'create']);
@@ -233,14 +213,42 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/carts/{id}/decrease', [CartController::class, 'decrease']);
     // Удаление товара из корзины
     Route::delete('/carts/{id}', [CartController::class, 'destroy']);
+});
 
-    // СТАТУСЫ ЗАКАЗА
-    // Просмотр всех статусов
-    Route::get('/statuses', [StatusController::class, 'index']);
-
+// Функционал админа и менеджера
+Route::middleware('auth:api, role:admin|manager')->group(function () {
     // ИНФОРМАЦИЯ ПО ПРОДАЖАМ
     // Просмотр всех продаж за период (день/месяц/год)
     Route::post('/sales', [SaleController::class, 'getSalesByPeriod']);
     // Просмотр продаж по позиции за период (день/месяц/год)
     Route::post('/sales/{id}', [SaleController::class, 'getSalesByPeriodAndProduct']);
+
+    // ФОТОГРАФИИ
+    // Добавление фотографии
+    Route::post('/photos', [PhotoController::class, 'store']);
+    // Редактирование фотографии
+    Route::post('/photos/{id}', [PhotoController::class, 'update']);
+    // Удаление фотографии
+    Route::delete('/photos/{id}', [PhotoController::class, 'destroy']);
 });
+
+// Функционал админа
+Route::middleware('auth:api, role:admin')->group(function () {
+    // СЛАЙДЕР
+    // Добавление фотографии в слайдер
+    Route::post('/slider', [SliderController::class, 'add']);
+    // Редактирование фотографии в слайдере
+    Route::post('/slider/{id}', [SliderController::class, 'update']);
+    // Удаление фотографии в слайдере
+    Route::delete('/slider/{id}', [SliderController::class, 'destroy']);
+
+    // НОВОСТЬ_ФОТОГРАФИЯ
+    // Добавление новостной фотографии
+    Route::post('/article-photos', [ArticlePhotoController::class, 'create']);
+    // Редактирование новостной фотографии
+    Route::post('/article-photos/{id}', [ArticlePhotoController::class, 'update']);
+    // Удаление новостной фотографии
+    Route::delete('/article-photos/{id}', [ArticlePhotoController::class, 'destroy']);
+});
+
+
