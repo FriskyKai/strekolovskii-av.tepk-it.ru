@@ -126,7 +126,6 @@ Route::middleware('auth:api')->group(function () {
     // Удаление заказа
     Route::delete('/orders/{id}', [OrderController::class, 'destroy']);
 
-    # Переработать под пользователя
     // СОСТАВ ЗАКАЗА
     // Добавление состава заказа
     Route::post('/order-lists', [OrderListController::class, 'create']);
@@ -153,7 +152,6 @@ Route::middleware('auth:api')->group(function () {
     // Удаление добавки
     Route::delete('/additives/{id}', [AdditiveController::class, 'destroy']);
 
-    # Переработать под пользователя
     // СОСТАВ ЗАКАЗА_ДОБАВКА
     // Добавление добавки в состав заказа
     Route::post('/order-list-additives', [OrderListAdditiveController::class, 'create']);
