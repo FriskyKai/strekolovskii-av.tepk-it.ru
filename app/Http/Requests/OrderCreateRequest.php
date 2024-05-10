@@ -18,7 +18,7 @@ class OrderCreateRequest extends ApiRequest
             'status_id' => 'required|integer|exists:statuses,id',
             'receive_method_id' => 'required|integer|exists:receive_methods,id',
             'payment_type_id' => 'required|integer|exists:payment_types,id',
-            'user_id' => 'required|integer|exists:users,id',
+            'user_id' => 'integer|exists:users,id',
             'address_id' => 'required|integer|exists:addresses,id',
         ];
     }

@@ -216,7 +216,7 @@ Route::middleware('auth:api')->group(function () {
 });
 
 // Функционал админа и менеджера
-Route::middleware('auth:api, role:admin|manager')->group(function () {
+Route::middleware(['auth:api', 'role:admin|manager'])->group(function () {
     // ИНФОРМАЦИЯ ПО ПРОДАЖАМ
     // Просмотр всех продаж за период (день/месяц/год)
     Route::post('/sales', [SaleController::class, 'getSalesByPeriod']);
@@ -233,7 +233,7 @@ Route::middleware('auth:api, role:admin|manager')->group(function () {
 });
 
 // Функционал админа
-Route::middleware('auth:api, role:admin')->group(function () {
+Route::middleware(['auth:api', 'role:admin'])->group(function () {
     // СЛАЙДЕР
     // Добавление фотографии в слайдер
     Route::post('/slider', [SliderController::class, 'add']);
