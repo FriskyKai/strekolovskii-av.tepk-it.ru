@@ -37,7 +37,7 @@ class OrderController extends Controller
     }
 
     // Просмотр всех заказов пользователя
-    public function my() {
+    public function showByUser() {
         $orders = Order::where('user_id', Auth::user()->id)->get();
 
         if (!$orders) {

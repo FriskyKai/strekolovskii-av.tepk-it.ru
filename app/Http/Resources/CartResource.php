@@ -13,6 +13,7 @@ class CartResource extends JsonResource
             'id' => $this->id,
             'user' => $this->user->surname . ' ' . $this->user->name,
             'product' => $this->product->name,
+            'price' => $this->product->price,
             'count' => $this->count,
         ];
     }

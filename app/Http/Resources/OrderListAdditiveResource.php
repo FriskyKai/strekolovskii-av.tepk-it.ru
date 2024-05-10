@@ -17,7 +17,7 @@ class OrderListAdditiveResource extends JsonResource
         return [
             'id' => $this->id,
             'order_list' => $this->order_list_id,
-            'additive' => $this->additive_id,
+            'additive' => $this->additive->name,
         ];
     }
 }

@@ -12,11 +12,9 @@ class Article extends Model
     protected $fillable = [
         'title',
         'description',
-        'date',
     ];
 
     protected $hidden = [
-        'created_at',
         'updated_at',
     ];
 

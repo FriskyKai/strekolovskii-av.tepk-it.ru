@@ -14,7 +14,6 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\SliderController;
@@ -237,6 +236,8 @@ Route::middleware('auth:api')->group(function () {
     // Удаление товара из корзины
     Route::delete('/carts/{id}', [CartController::class, 'destroy']);
 
+    // СТАТУСЫ ЗАКАЗА
+    // Просмотр всех статусов
     Route::get('/statuses', [StatusController::class, 'index']);
 
     // ИНФОРМАЦИЯ ПО ПРОДАЖАМ
