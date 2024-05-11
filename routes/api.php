@@ -14,6 +14,7 @@ use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PromotionController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\ShiftController;
 use App\Http\Controllers\SliderController;
@@ -79,6 +80,18 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/users/{id}', [UserController::class, 'update']);
     // Удаление пользователя
     Route::delete('/users/{id}', [UserController::class, 'destroy']);
+
+    // ДОБАВКА
+    // Добавление добавки
+    Route::post('/roles', [RoleController::class, 'create']);
+    // Просмотр всех добавок
+    Route::get('/roles', [RoleController::class, 'index']);
+    // Просмотр добавки
+    Route::get('/roles/{id}', [RoleController::class, 'show']);
+    // Редактирование добавки
+    Route::post('/roles/{id}', [RoleController::class, 'update']);
+    // Удаление добавки
+    Route::delete('/roles/{id}', [RoleController::class, 'destroy']);
 
     // ПРОФИЛЬ
     // Профиль пользователя
